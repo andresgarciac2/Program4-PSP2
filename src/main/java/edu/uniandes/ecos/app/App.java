@@ -1,25 +1,38 @@
 package edu.uniandes.ecos.app;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
-import spark.ModelAndView;
-import spark.template.freemarker.FreeMarkerEngine;
+import static spark.Spark.get;
+import static spark.SparkBase.port;
+import static spark.SparkBase.staticFileLocation;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import static spark.Spark.*;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
+import edu.uniandes.ecos.calculator.RangeCalculator;
+import edu.uniandes.ecos.dto.ClassDto;
+import edu.uniandes.ecos.formater.DataFormater;
+import spark.ModelAndView;
+import spark.template.freemarker.FreeMarkerEngine;
 
 /**
- * Hello world!
- *
+ * @author andresgarcias4n
+ * @since 17/03/2017
+ * @version 0.0.1
  */
 public class App 
 {
+    /**
+     * Main, metodo principal
+     * 
+     * @param args
+     */
     public static void main( String[] args )
     {
     	port(Integer.valueOf(System.getenv("PORT")));
@@ -35,9 +48,27 @@ public class App
         }, new FreeMarkerEngine());
         
 
-        get("/results", (req, res) -> {
+        get("/results/:inputFile", (req, res) -> {
           Map<String, Object> attributes = new HashMap<>();
-            attributes.put("results", "ghghghghhghghghghhghghghhghghndjhnrcbcvhjwreb");
+          	
+          	DataFormater dataFormater = new DataFormater(req.params(":inputFile"));
+          	List<ClassDto> list = new ArrayList<ClassDto>();
+          	list.add(new ClassDto("each_char" ,18 ,3));
+          	list.add(new ClassDto("string_read" ,18 ,3));
+          	list.add(new ClassDto("single_character", 25, 3));
+          	list.add(new ClassDto("each_line", 31 ,3));
+          	list.add(new ClassDto("single_char", 37, 3));
+          	list.add(new ClassDto("string_builder" ,82 ,5));
+          	list.add(new ClassDto("string_manager", 82, 4));
+          	list.add(new ClassDto("list_clump" ,87 ,4));
+          	list.add(new ClassDto("list_clip" ,89, 4));
+          	list.add(new ClassDto("string_decrementer", 230, 10));
+          	list.add(new ClassDto("Char" ,85, 3));
+          	list.add(new ClassDto("Character" ,87 ,3));
+          	list.add(new ClassDto("Converter", 558 ,10));
+          	RangeCalculator.calculateResults(list);
+//          	dataFormater.getClasses();
+            attributes.put("results", req.params(":inputFile"));
             return new ModelAndView(attributes, "program_results.ftl");
 
         }, new FreeMarkerEngine());
