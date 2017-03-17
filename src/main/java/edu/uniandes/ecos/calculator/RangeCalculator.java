@@ -20,11 +20,10 @@ public class RangeCalculator {
 		double sumLnMinusAvgSqr = 0;
 		double deviation = 0;
 		for(ClassDto cl : classes)sumLn += cl.getLnLogDivMethod();
-		for(ClassDto cl : classes)sumLnMinusAvgSqr += Math.pow(cl.getLnLogDivMethod() - avg, 2);
-		
 		avg = sumLn/classes.size();
+		for(ClassDto cl : classes)sumLnMinusAvgSqr += Math.pow(cl.getLnLogDivMethod() - avg, 2);
 		var = sumLnMinusAvgSqr/(classes.size()-1);
-		
+
 		System.out.println(avg);
 		System.out.println(var);
 		
