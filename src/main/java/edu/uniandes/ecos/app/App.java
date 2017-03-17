@@ -33,6 +33,15 @@ public class App
 
             return new ModelAndView(attributes, "index.ftl");
         }, new FreeMarkerEngine());
+        
+
+        get("/results", (req, res) -> {
+          Map<String, Object> attributes = new HashMap<>();
+            attributes.put("results", "ghghghghhghghghghhghghghhghghndjhnrcbcvhjwreb");
+            return new ModelAndView(attributes, "program_results.ftl");
+
+        }, new FreeMarkerEngine());
+    
 
         HikariConfig config = new  HikariConfig();
         config.setJdbcUrl(System.getenv("JDBC_DATABASE_URL"));
