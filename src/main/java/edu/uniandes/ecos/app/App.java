@@ -38,23 +38,18 @@ public class App
     	port(Integer.valueOf(System.getenv("PORT")));
         staticFileLocation("/public");
 
-        get("/hello", (req, res) -> "Hello World");
-
-        get("/", (request, response) -> {
-            Map<String, Object> attributes = new HashMap<>();
-            attributes.put("message", "Hello World!");
-
-            return new ModelAndView(attributes, "index.ftl");
-        }, new FreeMarkerEngine());
         
-
+        //Entrada principal
+        get("/", (req, res) -> "Hello World <br> aca va el text");
+        
+        //Obtener resultados con datos de entrada por url
         get("/results/:inputFile", (req, res) -> {	
           	DataFormater dataFormater = new DataFormater(req.params(":inputFile"));
             return new ModelAndView(RangeCalculator.calculateResults(dataFormater.getClasses()), "program_results.ftl");
 
         }, new FreeMarkerEngine());
     
-
+        //Obtener resultados del test 1
         get("/resultsTest1", (req, res) -> {
             	List<ClassDto> list = new ArrayList<ClassDto>();
             	list.add(new ClassDto("each_char" ,18 ,3));
@@ -75,7 +70,7 @@ public class App
 
           }, new FreeMarkerEngine());
         
-        
+        //Obtener resultados del test 2
         get("/resultsTest2", (req, res) -> {
             	List<ClassDto> list = new ArrayList<ClassDto>();
             	list.add(new ClassDto("each_char" ,7 ,1));
@@ -98,32 +93,5 @@ public class App
               return new ModelAndView(RangeCalculator.calculateResults(list), "program_results.ftl");
 
           }, new FreeMarkerEngine());
-        
-        HikariConfig config = new  HikariConfig();
-        config.setJdbcUrl(System.getenv("JDBC_DATABASE_URL"));
-        final HikariDataSource dataSource = (config.getJdbcUrl() != null) ?
-          new HikariDataSource(config) : new HikariDataSource();
-
-        get("/db", (req, res) -> {
-          Map<String, Object> attributes = new HashMap<>();
-          try(Connection connection = dataSource.getConnection()) {
-            Statement stmt = connection.createStatement();
-            stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
-            stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
-            ResultSet rs = stmt.executeQuery("SELECT tick FROM ticks");
-
-            ArrayList<String> output = new ArrayList<String>();
-            while (rs.next()) {
-              output.add( "Read from DB: " + rs.getTimestamp("tick"));
-            }
-
-            attributes.put("results", output);
-            return new ModelAndView(attributes, "db.ftl");
-          } catch (Exception e) {
-            attributes.put("message", "There was an error: " + e);
-            return new ModelAndView(attributes, "error.ftl");
-          }
-        }, new FreeMarkerEngine());
-
     }
 }

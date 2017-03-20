@@ -30,6 +30,8 @@ public class DataFormater {
 	}
 
 	/**
+	 * obtener lista de clases
+	 * 
 	 * @return the classes
 	 */
 	public List<ClassDto> getClasses() {

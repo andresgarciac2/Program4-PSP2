@@ -13,6 +13,12 @@ import edu.uniandes.ecos.dto.ClassDto;
  */
 public class RangeCalculator {
 
+	/**
+	 * Calcula los rangos para los datos ingresados
+	 * 
+	 * @param classes
+	 * @return
+	 */
 	public static Map<String,String> calculateResults(List<ClassDto> classes){
 		
 		Map<String,String> results = new HashMap<String,String>();
