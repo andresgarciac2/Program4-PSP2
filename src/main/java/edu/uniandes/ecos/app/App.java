@@ -48,32 +48,57 @@ public class App
         }, new FreeMarkerEngine());
         
 
-        get("/results/:inputFile", (req, res) -> {
-          Map<String, Object> attributes = new HashMap<>();
-          	
+        get("/results/:inputFile", (req, res) -> {	
           	DataFormater dataFormater = new DataFormater(req.params(":inputFile"));
-          	List<ClassDto> list = new ArrayList<ClassDto>();
-          	list.add(new ClassDto("each_char" ,18 ,3));
-          	list.add(new ClassDto("string_read" ,18 ,3));
-          	list.add(new ClassDto("single_character", 25, 3));
-          	list.add(new ClassDto("each_line", 31 ,3));
-          	list.add(new ClassDto("single_char", 37, 3));
-          	list.add(new ClassDto("string_builder" ,82 ,5));
-          	list.add(new ClassDto("string_manager", 82, 4));
-          	list.add(new ClassDto("list_clump" ,87 ,4));
-          	list.add(new ClassDto("list_clip" ,89, 4));
-          	list.add(new ClassDto("string_decrementer", 230, 10));
-          	list.add(new ClassDto("Char" ,85, 3));
-          	list.add(new ClassDto("Character" ,87 ,3));
-          	list.add(new ClassDto("Converter", 558 ,10));
-          	RangeCalculator.calculateResults(list);
-//          	dataFormater.getClasses();
-            attributes.put("results", req.params(":inputFile"));
-            return new ModelAndView(attributes, "program_results.ftl");
+            return new ModelAndView(RangeCalculator.calculateResults(dataFormater.getClasses()), "program_results.ftl");
 
         }, new FreeMarkerEngine());
     
 
+        get("/resultsTest1", (req, res) -> {
+            	List<ClassDto> list = new ArrayList<ClassDto>();
+            	list.add(new ClassDto("each_char" ,18 ,3));
+            	list.add(new ClassDto("string_read" ,18 ,3));
+            	list.add(new ClassDto("single_character", 25, 3));
+            	list.add(new ClassDto("each_line", 31 ,3));
+            	list.add(new ClassDto("single_char", 37, 3));
+            	list.add(new ClassDto("string_builder" ,82 ,5));
+            	list.add(new ClassDto("string_manager", 82, 4));
+            	list.add(new ClassDto("list_clump" ,87 ,4));
+            	list.add(new ClassDto("list_clip" ,89, 4));
+            	list.add(new ClassDto("string_decrementer", 230, 10));
+            	list.add(new ClassDto("Char" ,85, 3));
+            	list.add(new ClassDto("Character" ,87 ,3));
+            	list.add(new ClassDto("Converter", 558 ,10));
+
+              return new ModelAndView(RangeCalculator.calculateResults(list), "program_results.ftl");
+
+          }, new FreeMarkerEngine());
+        
+        
+        get("/resultsTest2", (req, res) -> {
+            	List<ClassDto> list = new ArrayList<ClassDto>();
+            	list.add(new ClassDto("each_char" ,7 ,1));
+            	list.add(new ClassDto("string_read" ,12 ,1));
+            	list.add(new ClassDto("single_character", 10, 1));
+            	list.add(new ClassDto("each_line", 12 ,1));
+            	list.add(new ClassDto("single_char", 10, 1));
+            	list.add(new ClassDto("string_builder" ,12 ,1));
+            	list.add(new ClassDto("string_manager", 12, 1));
+            	list.add(new ClassDto("list_clump" ,12 ,1));
+            	list.add(new ClassDto("list_clip" ,12, 1));
+            	list.add(new ClassDto("string_decrementer", 8, 1));
+            	list.add(new ClassDto("Char" ,8, 1));
+            	list.add(new ClassDto("Character" ,8 ,1));
+            	list.add(new ClassDto("Converter", 20 ,1));
+            	list.add(new ClassDto("Converter", 14 ,1));
+            	list.add(new ClassDto("Converter", 18 ,1));
+            	list.add(new ClassDto("Converter", 12 ,1));
+
+              return new ModelAndView(RangeCalculator.calculateResults(list), "program_results.ftl");
+
+          }, new FreeMarkerEngine());
+        
         HikariConfig config = new  HikariConfig();
         config.setJdbcUrl(System.getenv("JDBC_DATABASE_URL"));
         final HikariDataSource dataSource = (config.getJdbcUrl() != null) ?

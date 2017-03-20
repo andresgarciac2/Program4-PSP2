@@ -2,6 +2,23 @@
 <html>
 <head>
   <#include "header.ftl">
+  <style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
 </head>
 
 <body>
@@ -9,7 +26,23 @@
   <#include "nav.ftl">
 
 <div class="container">
-${results}
+
+<table>
+  <tr>
+    <th>VS</th>
+    <th>S</th>
+    <th>M</th>
+    <th>L</th>
+    <th>VL</th>
+  </tr>
+  <tr>
+    <td>${VS}</td>
+    <td>${S}</td>
+    <td>${M}</td>
+    <td>${L}</td>
+    <td>${VL}</td>
+  </tr>
+
 </div>
 
 </body>
