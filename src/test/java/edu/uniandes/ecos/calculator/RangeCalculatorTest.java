@@ -15,7 +15,7 @@ public class RangeCalculatorTest {
 	RangeCalculator rangeCalculator = new RangeCalculator();
 	
 	@Test
-	public void calculateRegressionDataTest1() {	 
+	public void calculateRangeCalculatorTest1() {	 
 		Map<String,String> results = rangeCalculator.calculateResults(getClassesTest1());
 
 		assertTrue(results.get("VS").equals("4.309819041171236"));
@@ -27,7 +27,7 @@ public class RangeCalculatorTest {
 	}
 	
 	@Test
-	public void calculateRegressionDataTest2() {	 
+	public void calculateRangeCalculatorTest2() {	 
 		Map<String,String> results = rangeCalculator.calculateResults(getClassesTest2());
 
 		assertTrue(results.get("VS").equals("6.3375179612117245"));
