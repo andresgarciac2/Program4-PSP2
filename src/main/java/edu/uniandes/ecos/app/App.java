@@ -40,7 +40,11 @@ public class App
 
         
         //Entrada principal
-        get("/", (req, res) -> "Hello World <br> aca va el text");
+        get("/", (req, res) -> {	
+
+            return new ModelAndView(null, "index.ftl");
+
+        }, new FreeMarkerEngine());
         
         //Obtener resultados con datos de entrada por url
         get("/results/:inputFile", (req, res) -> {	
