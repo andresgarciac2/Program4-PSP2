@@ -4,16 +4,9 @@ import static spark.Spark.get;
 import static spark.SparkBase.port;
 import static spark.SparkBase.staticFileLocation;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.uniandes.ecos.calculator.RangeCalculator;
 import edu.uniandes.ecos.dto.ClassDto;
